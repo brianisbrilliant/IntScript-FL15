@@ -1,20 +1,31 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Assets.Code.States;
+using Assets.Code.Interfaces;
 
 public class StateManager : MonoBehaviour {
 
-	private BeginState activeState;
-	private BeginState secondState;
+	private IStateBase activeState;
 
-	// Use this for initialization
 	void Start () {
-		activeState = new BeginState("Brian", 26, "professor");
-		secondState = new BeginState("Dumbledore", 150, "Headmaster");
-		Debug.Log("blah blah blah");
+		activeState = new BeginState(this);
+		Debug.Log("This object is of the type '" + activeState + "'");
+		//Debug.Log("food for thought");
 	}
 	
-	// Update is called once per frame
 	void Update () {
-	
+		// this method is called every frame.
+		if(activeState != null)
+			activeState.StateUpdate();
+	}
+
+	public void SwitchState(IStateBase newState) {
+		activeState = newState;
+	}
+
+	// this method is called every frame.
+	// for displaying graphics, text, and buttons.
+	void OnGUI() {
+		if(activeState != null)
+			activeState.ShowIt();
 	}
 }
