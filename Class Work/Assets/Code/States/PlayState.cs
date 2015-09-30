@@ -15,7 +15,7 @@ namespace Assets.Code.States {
 		public void StateUpdate() {
 			if(Input.GetButtonUp("Jump"))
 				manager.SwitchState(new WonState(manager));
-			else if(Input.GetButtonUp("Submit"))
+			if(Input.GetKeyUp(KeyCode.Return))
 				manager.SwitchState(new LostState(manager));
 		}
 

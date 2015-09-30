@@ -6,15 +6,18 @@ namespace Assets.Code.States {
 
 		private StateManager manager;
 
-		public WonState (StateManager managerReference) { 	// Constructor
-			manager = managerReference;
+		public WonState (StateManager managerRef) { 	// Constructor
+			manager = managerRef;
 			Debug.Log("WonState Constructed.");
 			//Debug.Log("Black Sheep Wall.");
+			Debug.Log("Hello World");
 		}
 
 		public void StateUpdate() {
-			if(Input.GetButtonUp("Jump"))
+			if(Input.GetButtonUp("Jump")) {
+				Application.LoadLevel("BeginningState");
 				manager.SwitchState(new BeginState(manager));
+			}
 		}
 
 		public void ShowIt() {

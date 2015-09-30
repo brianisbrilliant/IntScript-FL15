@@ -6,15 +6,17 @@ namespace Assets.Code.States {
 
 		private StateManager manager;
 
-		public LostState (StateManager managerReference) { 	// Constructor
-			manager = managerReference;
+		public LostState (StateManager managerRef) { 	// Constructor
+			manager = managerRef;
 			Debug.Log("LostState Constructed.");
 			//Debug.Log("You require more minerals.");
 		}
 
 		public void StateUpdate() {
-			if(Input.GetButtonUp("Jump"))
+			if(Input.GetButtonUp("Jump")) {
 				manager.SwitchState(new BeginState(manager));
+				Application.LoadLevel("BeginningState");
+			}
 		}
 
 		public void ShowIt() {

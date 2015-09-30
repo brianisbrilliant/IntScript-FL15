@@ -5,6 +5,16 @@ using Assets.Code.Interfaces;
 public class StateManager : MonoBehaviour {
 
 	private IStateBase activeState;
+	static StateManager instanceRef;
+
+	void Awake() {
+		if(instanceRef == null) {
+			instanceRef = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else
+			DestroyImmediate(gameObject);
+	}
 
 	void Start () {
 		activeState = new BeginState(this);

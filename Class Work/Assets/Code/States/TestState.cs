@@ -2,16 +2,16 @@ using UnityEngine;
 using Assets.Code.Interfaces;
 
 namespace Assets.Code.States {
-	public class BeginState : IStateBase {
+	public class TestState : IStateBase {
 
-		StateManager manager;
+		public StateManager manager;
 		float futureTime = 0;
 		int countDown = 0;
 		float screenDuration = 8;
 
-		public BeginState (StateManager managerReference) { 	// Constructor
+		public TestState (StateManager managerReference) { 	// Constructor
 			manager = managerReference;
-			Debug.Log("BeginState Constructed.");
+			Debug.Log("TestState Constructed.");
 			futureTime = screenDuration + Time.realtimeSinceStartup;
 			Time.timeScale = 0;
 			//Debug.Log("You require more Vespene Gas.");
@@ -23,19 +23,17 @@ namespace Assets.Code.States {
 			if(Input.GetButtonUp("Jump") || countDown <= 0) {
 				Switch();
 			}
-			
 		}
 
 		public void ShowIt() {
-			if(GUI.Button(new Rect((Screen.width / 2) - 75,(Screen.height / 2) - 50,150,100), "Press to Play")) {
-				Switch();
-				//manager.SwitchState(new PlayState(manager));
+			if(GUI.Button(new Rect(10,10,150,100), "Press to Play")) {
+				manager.SwitchState(new PlayState(manager));
+				Time.timeScale = 1;
 			}
 		}
 
 		void Switch() {
 			Time.timeScale = 1;
-			Application.LoadLevel("Scene1");		// name of scene save file
 			manager.SwitchState(new PlayState(manager));
 		}
 	}
