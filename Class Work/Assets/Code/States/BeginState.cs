@@ -10,6 +10,7 @@ namespace Assets.Code.States
 		public BeginState (StateManager managerRef)
 		{
 			manager = managerRef;
+			Debug.Log ("In BeginState");
 			if(Application.loadedLevelName != "Scene0")
 				Application.LoadLevel("Scene0");
 		}
@@ -24,7 +25,7 @@ namespace Assets.Code.States
 		
 		public void ShowIt ()
 		{
-			Debug.Log ("In BeginState");
+			
 		}
 	}
 }
