@@ -3,28 +3,29 @@ using Assets.Code.Interfaces;
 
 namespace Assets.Code.States
 {
-	public class BeginState : IStateBase
+	public class WonStateScene2 : IStateBase
 	{
 		private StateManager manager;
 		
-		public BeginState (StateManager managerRef)
+		public WonStateScene2 (StateManager managerRef)
 		{
 			manager = managerRef;
 			if(Application.loadedLevelName != "Scene0")
 				Application.LoadLevel("Scene0");
 		}
-		
-		public void StateUpdate ()
+				
+		public void StateUpdate()
 		{
-			if (Input.GetKeyUp (KeyCode.Space))
+			if (Input.GetKeyUp (KeyCode.Space)) 
 			{
-				manager.SwitchState (new SetupState (manager));
+				manager.Restart();
 			}
 		}
 		
-		public void ShowIt ()
+		public void ShowIt()
 		{
-			Debug.Log ("In BeginState");
+			Debug.Log("In WonStateScene2");
 		}
 	}
 }
+

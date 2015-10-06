@@ -2,40 +2,50 @@ using UnityEngine;
 using Assets.Code.States;
 using Assets.Code.Interfaces;
 
-public class StateManager : MonoBehaviour {
-
-	private IStateBase activeState;
-	static StateManager instanceRef;
-
-	void Awake() {
-		if(instanceRef == null) {
+public class StateManager : MonoBehaviour
+{
+    private IStateBase activeState;
+	
+	private static StateManager instanceRef;
+	
+	void Awake ()
+	{
+		if(instanceRef == null)
+		{
 			instanceRef = this;
 			DontDestroyOnLoad(gameObject);
 		}
 		else
+		{
 			DestroyImmediate(gameObject);
+		}
 	}
 
-	void Start () {
+	void Start ()
+	{
 		activeState = new BeginState(this);
-		Debug.Log("This object is of the type '" + activeState + "'");
-		//Debug.Log("food for thought");
 	}
+
+    void Update()
+    {
+		if (activeState != null)
+        	activeState.StateUpdate();
+    }
 	
-	void Update () {
-		// this method is called every frame.
-		if(activeState != null)
-			activeState.StateUpdate();
-	}
-
-	public void SwitchState(IStateBase newState) {
-		activeState = newState;
-	}
-
-	// this method is called every frame.
-	// for displaying graphics, text, and buttons.
-	void OnGUI() {
+	void OnGUI()
+	{
 		if(activeState != null)
 			activeState.ShowIt();
+	}
+
+    public void SwitchState(IStateBase newState)
+    {
+        activeState = newState;
+    }
+	
+	public void Restart()
+	{
+		Destroy(gameObject);
+		Application.LoadLevel("Scene0");
 	}
 }

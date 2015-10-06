@@ -1,4 +1,4 @@
-﻿namespace Assets.Code.Interfaces
+namespace Assets.Code.Interfaces
 {
 	public interface IStateBase
 	{
@@ -6,3 +6,4 @@
 		void ShowIt();
 	}
 }
+

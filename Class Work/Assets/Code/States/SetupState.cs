@@ -1,13 +1,14 @@
 using UnityEngine;
 using Assets.Code.Interfaces;
+using System.Collections;
 
 namespace Assets.Code.States
 {
-	public class BeginState : IStateBase
+	public class SetupState : IStateBase
 	{
 		private StateManager manager;
 		
-		public BeginState (StateManager managerRef)
+		public SetupState (StateManager managerRef)
 		{
 			manager = managerRef;
 			if(Application.loadedLevelName != "Scene0")
@@ -18,13 +19,14 @@ namespace Assets.Code.States
 		{
 			if (Input.GetKeyUp (KeyCode.Space))
 			{
-				manager.SwitchState (new SetupState (manager));
+				manager.SwitchState (new PlayStateScene1_1 (manager));
 			}
 		}
 		
 		public void ShowIt ()
 		{
-			Debug.Log ("In BeginState");
+			Debug.Log ("In SetupState");
 		}
 	}
 }
+
