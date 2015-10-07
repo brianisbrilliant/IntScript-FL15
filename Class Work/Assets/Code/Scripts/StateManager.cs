@@ -7,6 +7,9 @@ public class StateManager : MonoBehaviour
     private IStateBase activeState;
 	
 	private static StateManager instanceRef;
+
+	[HideInInspector]
+	public GameData gameDataRef;
 	
 	void Awake ()
 	{
@@ -24,6 +27,7 @@ public class StateManager : MonoBehaviour
 	void Start ()
 	{
 		activeState = new BeginState(this);
+		gameDataRef = GetComponent<GameData>();
 	}
 
     void Update()

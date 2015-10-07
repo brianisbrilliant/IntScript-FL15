@@ -15,17 +15,19 @@ namespace Assets.Code.States
 				Application.LoadLevel("Scene0");
 		}
 		
-		public void StateUpdate ()
-		{
-			if (Input.GetKeyUp (KeyCode.Space))
-			{
-				manager.SwitchState (new SetupState (manager));
-			}
+		public void StateUpdate () {
 		}
 		
 		public void ShowIt ()
 		{
+			GUI.DrawTexture(new Rect(0,0, Screen.width,
+				Screen.height), manager.gameDataRef.beginStateSplash,
+				ScaleMode.StretchToFill);
 			
+			if(GUI.Button(new Rect(10, 10, 250, 60), 
+				"Press here or any key to continue.") || Input.anyKeyDown) {
+					manager.SwitchState(new SetupState(manager));
+			}
 		}
 	}
 }

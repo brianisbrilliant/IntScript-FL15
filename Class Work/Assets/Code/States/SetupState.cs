@@ -7,6 +7,8 @@ namespace Assets.Code.States
 	public class SetupState : IStateBase
 	{
 		private StateManager manager;
+		private Gameobject player;
+		private
 		
 		public SetupState (StateManager managerRef)
 		{
