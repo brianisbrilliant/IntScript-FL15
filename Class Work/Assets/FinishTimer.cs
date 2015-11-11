@@ -4,13 +4,8 @@ using System.Collections;
 public class FinishTimer : MonoBehaviour {
 
 	public float timer;
-			int displayTimer;
 			bool finished = false; 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if(!finished)

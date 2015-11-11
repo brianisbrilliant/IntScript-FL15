@@ -18,11 +18,10 @@ public class PickUpItem : MonoBehaviour {
 	// if you press 'Q' it will let go of the last item.
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.Q)) {
-			itemCount--;
-			ShowCurrentItem(itemCount);
-			items[itemCount].transform.parent = null;
-			items.RemoveAt(itemCount);
-			ShowCurrentItem(itemCount-1);
+			items[currentItem].transform.parent = null;
+			items.RemoveAt(currentItem);
+			currentItem--;
+			ShowCurrentItem(currentItem);
 		}
 
 		// show only 1 item
@@ -36,25 +35,30 @@ public class PickUpItem : MonoBehaviour {
 			ShowCurrentItem(3);
 		else 
 			Debug.Log("That number is not supported.");
+
+		//if(Input.GetButtonDown("Fire1"))
+		//	items[currentItem].Fire();
 	}
 
+
 	// this displays a text box saying "Press 'E'".
-	void OnGUI() {
+	/*void OnGUI() {
 		if(pickUp) {
 			GUI.Box(new Rect(Screen.width/2,Screen.height/2, 75,25), "Press 'E'");
 		}
-	}
+	}*/
 
 	// if an object tagged 'Item' is inside the player sphere collider
 	// if the player presses 'E' then it changes the parent to the player and adds the item to a list.
-	void OnTriggerStay(Collider other) {
+	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "Item") {
 			//Debug.Log("Press E to Pick up!");
 			pickUp = true;
 			//if(Input.GetKeyDown(KeyCode.E)) {
 				other.transform.SetParent(player);
 				items.Add(other);
-				ShowCurrentItem(itemCount);
+				currentItem = itemCount;
+				ShowCurrentItem(currentItem);
 				itemCount++;
 
 			//}
@@ -76,4 +80,6 @@ public class PickUpItem : MonoBehaviour {
 				items[i].gameObject.SetActive(false);
 		}
 	}
+
+	
 }
