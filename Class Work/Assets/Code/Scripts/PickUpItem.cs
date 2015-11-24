@@ -23,6 +23,7 @@ public class PickUpItem : MonoBehaviour {
 			items[itemCount].transform.parent = null;
 			items.RemoveAt(itemCount);
 			ShowCurrentItem(itemCount-1);
+			itemCount = items.Count;
 		}
 
 		// show only 1 item
@@ -39,25 +40,33 @@ public class PickUpItem : MonoBehaviour {
 	}
 
 	// this displays a text box saying "Press 'E'".
-	void OnGUI() {
+	/*void OnGUI() {
 		if(pickUp) {
 			GUI.Box(new Rect(Screen.width/2,Screen.height/2, 75,25), "Press 'E'");
 		}
-	}
+	}*/
 
 	// if an object tagged 'Item' is inside the player sphere collider
 	// if the player presses 'E' then it changes the parent to the player and adds the item to a list.
-	void OnTriggerStay(Collider other) {
+	void OnTriggerEnter(Collider other) {
 		if(other.gameObject.tag == "Item") {
-			//Debug.Log("Press E to Pick up!");
 			pickUp = true;
-			//if(Input.GetKeyDown(KeyCode.E)) {
-				other.transform.SetParent(player);
-				items.Add(other);
-				ShowCurrentItem(itemCount);
-				itemCount++;
-
-			//}
+				other.transform.SetParent(player);			// now the object follows the player
+				other.transform.localPosition = new Vector3(0.4f,0.4f,1);		// puts the object in front of the player
+				other.transform.localRotation = Quaternion.identity;			// makes the object point forward
+				if(other.gameObject.name == "Pistol") {
+					Debug.Log("Hello Quickdraw!");
+					items.Insert(0, other);
+				}
+				else if(other.gameObject.name == "Sniper") {
+					Debug.Log("Hello Headshot!");
+					items.Insert(5, other);
+				}
+				else {
+					items.Add(other);
+				}							// adds item to list
+				ShowCurrentItem(itemCount);					// makes sure item just added is showing
+				itemCount = items.Count;					// updates the iterator
 		}
 	}
 
