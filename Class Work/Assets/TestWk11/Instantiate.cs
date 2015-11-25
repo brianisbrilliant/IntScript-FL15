@@ -3,17 +3,15 @@ using System.Collections;
 
 public class Instantiate : MonoBehaviour {
 
-	public GameObject bullet;
+	public GameObject projectile;
 
 	void FixedUpdate () {
-		if(Input.GetButton("Fire1")) {
-			Shoot();
-		}
 	}
 
-	void Shoot() { 
+	public void Shoot() { 
 		Rigidbody clone;
-        clone = Instantiate(bullet, transform.position, transform.rotation) as Rigidbody;
-        clone.velocity = transform.TransformDirection(Vector3.forward * 100);
+    	clone = Instantiate(projectile, transform.position,transform.rotation) as Rigidbody;
+    	clone.transform.Translate(0, .5f, 2.1f);
+    	clone.velocity = transform.TransformDirection(Vector3.forward * 50);
 	}
 }
